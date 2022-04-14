@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Type</title>
+    <style>
+        #input-origin {
+            font-size: 25px;
+            outline: none;
+        }
+
+        .operate-area {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        textarea {
+            padding: 0;
+            margin: 0;
+        }
+
+        .operate-area .show-area {
+            border: #000 1px solid;
+            padding: 0;
+        }
+
+        .btn-field {
+            overflow: hidden;
+            width: 740px;
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+
+        .btn-field div {
+            display: flex;
+            /* justify-content: space-between; */
+            flex-wrap: wrap;
+        }
+
+        .btn-field div span {
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 40px;
+            padding: 5px 10px;
+            border: 1px #000 solid;
+        }
+
+        .btn-field input {
+            display: none;
+        }
+
+        .btn-field label {
+            float: left;
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all .3s;
+        }
+
+        .btn-field ul {
+            clear: both;
+            width: 3500px;
+            min-height: 600px;
+            transition: all .5s;
+        }
+
+        .btn-field ul li {
+            float: left;
+            list-style: none;
+            width: 700px;
+            min-height: 600px;
+            margin-right: 40px;
+        }
+
+        #tab1:checked~ul {
+            margin-left: 0;
+        }
+
+        #tab2:checked~ul {
+            margin-left: -740px;
+        }
+
+        #tab3:checked~ul {
+            margin-left: -1480px;
+        }
+
+        #tab4:checked~ul {
+            margin-left: -2220px;
+        }
+
+        #tab1:checked~label[for="tab1"] {
+            border: 1px solid #000;
+        }
+
+        #tab2:checked~label[for="tab2"] {
+            border: 1px solid #000;
+        }
+
+        #tab3:checked~label[for="tab3"] {
+            border: 1px solid #000;
+        }
+
+        #tab4:checked~label[for="tab4"] {
+            border: 1px solid #000;
+        }
+    </style>
+
+</head>
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [["\$", "\$"], ["\\(", "\\)"]],
+            displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+            skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"],
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+</script>
+<script src="./MathJax-3.2.0/es5/tex-svg.js" id="MathJax-script"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+<body>
+    <div class="operate-area">
+        <div class="input-area">
+            <textarea name="" id="input-origin" cols="30" rows="10"></textarea>
+        </div>
+        <div class="show-area">
+            <p class="latex-formula">$$ $$</p>
+        </div>
+    </div>
+
+    <div class="btn-field">
+        <input type="radio" id="tab1" checked name="basic">
+        <input type="radio" id="tab2" name="basic">
+        <input type="radio" id="tab3" name="basic">
+        <input type="radio" id="tab4" name="basic">
+
+        <label for="tab1">基本</label>
+        <label for="tab2">基本运算</label>
+        <label for="tab3">微积分</label>
+        <label for="tab4">常用字母</label>
+        <ul>
+            <li>
+                <h2>基本</h2>
+                <div>
+                    <span id="init">重置</span>
+                    <span class="init-operation" id="inline-formula" do="$ $">行内公式</span>
+                    <span class="init-operation" id="block-formula" do="$$ $$">行间公式</span>
+                </div>
+            </li>
+            <li>
+                <h2>基本运算</h2>
+                <div>
+                    <span class="operation" id="frac" do="\frac{}{}">$ \frac{a}{b} $</span>
+                    <span class="operation" id="superscript" do="^{}">$x^{a}$</span>
+                    <span class="operation" id="function-x" do="f(x)={}">$f(x)$</span>
+                    <span class="operation" id="cdot" do="\cdot{}">$\cdot{}$</span>
+                    <span class="operation" id="approx" do="\approx{}">$\approx{}$</span>
+                    <span class="operation" id="neq" do="\neq{}">$\neq{}$</span>
+                    <span class="operation" id="sqrt" do="\sqrt{}">$\sqrt{a}$</span>
+                    <span class="operation" id="right_arrow" do="\rightarrow">$\rightarrow$</span>
+                    <span class="operation" do="\pi">$\pi$</span>
+                    <span class="operation" do="e">$e$</span>
+                    <span class="operation" do="e^x">$e^x$</span>
+                    <span class="operation" id="x_0" do="x_{0}">$x_{0}$</span>
+                    <span class="operation" id="log_ax" do="\log_{a}{x}">$\log_{a}{x}$</span>
+                    <span class="operation" id="ln_x" do="\ln{x}">$\ln{x}$</span>
+                </div>
+                <h3>三角学</h3>
+                <div>
+                    <span class="operation" id="sin" do="\sin{}">$\sin{a}$</span>
+                    <span class="operation" id="cos" do="\cos{}">$\cos{a}$</span>
+                    <span class="operation" id="tan" do="\tan{}">$\tan{a}$</span>
+                    <span class="operation" id="sin_2" do="\sin({})">$\sin({a})$</span>
+                    <span class="operation" id="cos_2" do="\cos({})">$\cos({a})$</span>
+                    <span class="operation" id="tan_2" do="\tan({})">$\tan({a})$</span>
+                    <span class="operation" id="tan_-1" do="\tan^-1({})">$\tan^-1({a})$</span>
+                </div>
+            </li>
+            <li>
+                <h2>微积分</h2>
+                <div>
+                    <span class="operation" id="delta-x" do="\Delta x">$\Delta x$</span>
+                    <span class="operation" id="derivative-1-1" do="\frac{dx}{dy}">$\frac{dx}{dy}$</span>
+                    <span class="operation" id="derivative-1-2" do="\frac{d}{dy}">$\frac{d}{dy}$</span>
+                    <span class="operation" id="derivative-2" do="f'(x)={}">$f'(x)$</span>
+                    <span class="operation" id="y-prime" do="y'">$y'$</span>
+                    <span class="operation" id="second-derivative-2" do="f''(x)">$f''(x)$</span>
+                    <span class="operation" id="integral" do="\int_{}^{}">$\int_{a}^{b}$</span>
+                    <span class="operation" id="lim_x_to_infinity" do="\lim_{x \to \infty}">$\lim_{x \to \infty}$</span>
+                    <span class="operation" id="x_to_0" do="\Delta x \rightarrow 0">$\Delta x \rightarrow 0$</span>
+                </div>
+                <h3>常见公式</h3>
+                <div>
+                    <span class="operation" id="f_difination"
+                        do="f'(x_0)=\lim_{x \to \infty}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}">$f'(x_0)=\lim_{x \to
+                        \infty}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</span>
+                    <span class="operation" id="f_x_n_power"
+                        do="\frac{d}{dx}x^n=nx^{n-1}">$\frac{d}{dx}x^n=nx^{n-1}$</span>
+                    <span class="operation" id="f_1_x"
+                        do="\frac{d}{dx}(\frac{1}{x})=-\frac{1}{x^2}">$\frac{d}{dx}(\frac{1}{x})=-\frac{1}{x^2}$</span>
+                    <span class="operation" do="f(x)\approx f(x_0)+f'(x_0)(x-x_0) (x\approx x_0)">$f(x)\approx
+                        f(x_0)+f'(x_0)(x-x_0) (x\approx x_0)$</span>
+                    <span class="operation"
+                        do="f(x)\approx f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2 (x\approx x_0)">$f(x)\approx
+                        f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2 (x\approx x_0)$</span>
+                </div>
+            </li>
+            <li>
+                <h2>常用字母</h2>
+                <div>
+                    <span class="operation" do="a ">$a$</span>
+                    <span class="operation" do="b ">$b$</span>
+                    <span class="operation" do="c ">$c$</span>
+                    <span class="operation" do="y ">$y$</span>
+                    <span class="operation" do="x ">$x$</span>
+                    <span class="operation" do="n ">$n$</span>
+                    <span class="operation" do="\Delta ">$\Delta$</span>
+                    <span class="operation" do="\delta ">$\delta$</span>
+                    <span class="operation" do="\theta ">$\theta$</span>
+                </div>
+
+            </li>
+        </ul>
+
+
+
+
+
+
+
+    </div>
+    <script>
+
+    </script>
+
+
+    <script>
+        (function ($) {
+            $.fn.extend({
+                insertContent: function (myValue, t) {
+                    var $t = $(this)[0];
+                    if (document.selection) { // ie
+                        this.focus();
+                        var sel = document.selection.createRange();
+                        sel.text = myValue;
+                        this.focus();
+                        sel.moveStart('character', -l);
+                        var wee = sel.text.length;
+                        if (arguments.length == 2) {
+                            var l = $t.value.length;
+                            sel.moveEnd("character", wee + t);
+                            t <= 0 ? sel.moveStart("character", wee - 2 * t - myValue.length) : sel.moveStart("character", wee - t - myValue.length);
+                            sel.select();
+                        }
+                    } else if ($t.selectionStart
+                        || $t.selectionStart == '0') {
+                        var startPos = $t.selectionStart;
+                        var endPos = $t.selectionEnd;
+                        var scrollTop = $t.scrollTop;
+                        $t.value = $t.value.substring(0, startPos)
+                            + myValue
+                            + $t.value.substring(endPos, $t.value.length);
+                        this.focus();
+                        $t.selectionStart = startPos + myValue.length;
+                        $t.selectionEnd = startPos + myValue.length;
+                        $t.scrollTop = scrollTop;
+                        if (arguments.length == 2) {
+                            $t.setSelectionRange(startPos - t,
+                                $t.selectionEnd + t);
+                            this.focus();
+                        }
+                    } else {
+                        this.value += myValue;
+                        this.focus();
+                    }
+                }
+            })
+        })(jQuery);
+        $("#input-origin").val("$$  $$")
+        $("#input-origin").on("keyup change", function () {
+            $(".latex-formula").html($(this).val());
+            MathJax.typesetPromise();
+            // window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementsByClassName("ck-content")]);
+        })
+        $("#init").click(function () {
+            $("#input-origin").val("$$  $$")
+            $(".latex-formula").html($("#input-origin").val());
+            MathJax.typesetPromise();
+        })
+        $(".operation").click(function () {
+            $("#input-origin").insertContent($(this).attr("do"));
+            $(".latex-formula").html($("#input-origin").val());
+            MathJax.typesetPromise();
+        })
+        $("#inline-formula").click(function () {
+            $("#input-origin").val($("#input-origin").val().trim().replace(/\$/g, ""))
+            $("#input-origin").val("$ " + $("#input-origin").val().trim() + " $")
+            $(".latex-formula").html($("#input-origin").val());
+            MathJax.typesetPromise();
+        })
+        $("#block-formula").click(function () {
+            $("#input-origin").val($("#input-origin").val().trim().replace(/\$/g, ""))
+            $("#input-origin").val("$$ " + $("#input-origin").val().trim() + " $$")
+            $(".latex-formula").html($("#input-origin").val());
+            MathJax.typesetPromise();
+        })
+    </script>
+</body>
+<script>
+    $(".operate-area .show-area").css("width", $(".operate-area .input-area").width() + "px");
+    $(".operate-area .show-area").css("height", $(".operate-area .input-area").height() + "px");
+    $(".operate-area .input-area").mousemove(function () {
+        $(".operate-area .show-area").css("width", $(".operate-area .input-area").width() + "px");
+        $(".operate-area .show-area").css("height", $(".operate-area .input-area").height() + "px");
+    });
+</script>
+
+</html>
