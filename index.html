@@ -157,6 +157,7 @@
                     <span id="init">重置</span>
                     <span class="init-operation" id="inline-formula" do="$ $">行内公式</span>
                     <span class="init-operation" id="block-formula" do="$$ $$">行间公式</span>
+                    <span class="save-operation" id="save-svg">下载 SVG 文件</span>
                 </div>
             </li>
             <li>
@@ -191,7 +192,7 @@
             <li>
                 <h2>微积分</h2>
                 <div>
-                    <span class="operation"  do="\infty">$\infty$</span>
+                    <span class="operation" do="\infty">$\infty$</span>
                     <span class="operation" id="delta-x" do="\Delta x">$\Delta x$</span>
                     <span class="operation" id="derivative-1-1" do="\frac{dx}{dy}">$\frac{dy}{dx}$</span>
                     <span class="operation" id="derivative-1-2" do="\frac{d}{dy}">$\frac{d}{dx}$</span>
@@ -317,6 +318,22 @@
             $(".latex-formula").html($("#input-origin").val());
             MathJax.typesetPromise();
         })
+        function downloadString(text, fileType, fileName) {
+                var blob = new Blob([text], { type: fileType });
+
+                var a = document.createElement('a');
+                a.download = fileName;
+                a.href = URL.createObjectURL(blob);
+                a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+                a.style.display = "none";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500);
+            }
+        $("#save-svg").click(function () {
+            downloadString(document.getElementsByTagName("svg")[0].outerHTML, "image/svg", "save.svg")
+        })
     </script>
 </body>
 <script>
@@ -326,6 +343,7 @@
         $(".operate-area .show-area").css("width", $(".operate-area .input-area").width() + "px");
         $(".operate-area .show-area").css("height", $(".operate-area .input-area").height() + "px");
     });
+
 </script>
 
 </html>
