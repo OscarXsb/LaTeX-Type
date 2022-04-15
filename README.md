@@ -8,5 +8,6 @@
 - MathJax-3.2.0
 ## Online Demo
 > 在线演示   
+
 [https://oscarxsb.github.io/LaTeX-Type/index.html](https://oscarxsb.github.io/LaTeX-Type/index.html)
 ![Online Demo](./docs/imgs/demo1.png)
